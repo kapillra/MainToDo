@@ -9,19 +9,6 @@ class Role(models.Model):
     def __str__(self) -> str:
         return self.Role
 
-# Create your models here.
-class Master(models.Model):
-    Role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    Email = models.EmailField(unique=True)
-    Password = models.CharField(max_length=25)
-    IsActive = models.BooleanField(default=False)
-
-    class Meta:
-        db_table = 'master'
-
-    def __str__(self) -> str:
-        return self.Email
-
 class Department(models.Model):
     DeptName = models.CharField(max_length=25)
 
@@ -31,13 +18,26 @@ class Department(models.Model):
     def __str__(self) -> str:
         return self.DeptName
 
+class Master(models.Model):
+    Role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    Email = models.EmailField(unique=True)
+    Password = models.CharField(max_length=25)
+    Department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    IsActive = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'master'
+
+    def __str__(self) -> str:
+        return self.Email
+
 gender_choices = (
     ('m', 'male'),
     ('f', 'female')
 )
 class UserProfile(models.Model):
     Master = models.ForeignKey(Master, on_delete=models.CASCADE)
-    Department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    
 
     ProfileImage = models.FileField(upload_to='users/avatars', default='avatar.png')
 
@@ -53,7 +53,7 @@ class UserProfile(models.Model):
         db_table = 'userprofile'
 
     def __str__(self) -> str:
-        return self.FullName
+        return self.FullName if self.FullName else 'NoName'
 
 status_choices = (
     ('c', 'completed'),
