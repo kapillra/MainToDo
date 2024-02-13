@@ -6,6 +6,7 @@ register_page_url = 'register_page.html'
 profile_page_url = 'profile_page.html'
 reset_pwd_page_url = 'reset_password_page.html'
 
+default_data = {}
 
 def index(request):
     return render(request, login_page_url)
@@ -18,6 +19,23 @@ def register_page(request):
 
 def reset_password_page(request):
     return render(request, reset_pwd_page_url)
+
+
+# load profile data
+def profile_data(request):
+    master = Master.objects.get(Email=request.session['email'])
+    user_profile = UserProfile.objects.get(Master=master)
+
+    default_data['profile_data'] = user_profile
+
+    print('profile data called')
+
+def profile_page(request):
+    if 'email' in request.session:
+        profile_data(request)
+        return render(request, profile_page_url, default_data)
+    return redirect(index)
+
 
 def register(request):
     role = Role.objects.get(id=int(request.POST['roles']))
@@ -42,11 +60,19 @@ def login(request):
     try:
         master = Master.objects.get(Email = request.POST['email'])
         if master.Password == request.POST['password']:
-            pass
+            request.session['email'] = master.Email
+            return redirect(profile_page)
         else:
             print('incorrect password')
     except Master.DoesNotExist as err:
         print(err)
 
 
+    return redirect(index)
+
+# logout
+def logout(request):
+    if 'email' in request.session:
+        del request.session['email']
+    
     return redirect(index)
