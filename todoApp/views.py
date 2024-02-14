@@ -26,7 +26,10 @@ def profile_data(request):
     master = Master.objects.get(Email=request.session['email'])
     user_profile = UserProfile.objects.get(Master=master)
 
+    user_profile.BirthDate = user_profile.BirthDate.strftime("%Y-%m-%d")
+
     default_data['profile_data'] = user_profile
+    default_data['gender_choices'] = gender_choices
 
     print('profile data called')
 
@@ -56,6 +59,12 @@ def register(request):
     
     return redirect(index)
 
+# change password
+def change_password(request):
+    # write your code here
+    
+    return redirect(profile_page)
+
 def login(request):
     try:
         master = Master.objects.get(Email = request.POST['email'])
@@ -69,6 +78,24 @@ def login(request):
 
 
     return redirect(index)
+
+# profile update
+def profile_update(request):
+    master = Master.objects.get(Email=request.session['email'])
+    user = UserProfile.objects.get(Master=master)
+
+    user.FullName = request.POST['full_name']
+    user.Mobile = request.POST['mobile']
+    user.Country = request.POST['country']
+    user.State = request.POST['state']
+    user.City = request.POST['city']
+    user.BirthDate = request.POST['birth_date']
+    user.Gender = request.POST['gender']
+
+    user.save()
+
+    return redirect(profile_page)
+    
 
 # logout
 def logout(request):

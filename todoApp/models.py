@@ -33,7 +33,7 @@ class Master(models.Model):
 
 gender_choices = (
     ('m', 'male'),
-    ('f', 'female')
+    ('f', 'female'),
 )
 class UserProfile(models.Model):
     Master = models.ForeignKey(Master, on_delete=models.CASCADE)
