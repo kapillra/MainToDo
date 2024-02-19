@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from django.conf import settings
 
 login_page_url = 'login_page.html'
 register_page_url = 'register_page.html'
@@ -58,6 +59,34 @@ def register(request):
     print('account has been created.')
     
     return redirect(index)
+
+import os
+print(os.scandir(os.path.join(settings.MEDIA_ROOT, 'users/avatars')))
+
+# change profile image
+def upload_profile_image(request):
+    master = Master.objects.get(Email=request.session['email'])
+    user = UserProfile.objects.get(Master = master)
+
+    user.ProfileImage = request.FILES['profile_image']
+
+    img = request.FILES['profile_image']
+    
+    full_name = user.FullName.split()
+    full_name = '_'.join(full_name)
+
+    new_name = f'{full_name}_{user.Mobile}.{img.name.split(".")[-1]}'
+    img.name = new_name
+    file_path = os.path.join(settings.MEDIA_ROOT, 'users/avatars')
+    main_path = os.scandir(file_path)
+
+    for file in main_path:
+        if img.name in file.name:
+            os.remove(os.path.join(file_path, img.name))
+    
+    user.save()
+
+    return redirect(profile_page)
 
 # change password
 def change_password(request):
