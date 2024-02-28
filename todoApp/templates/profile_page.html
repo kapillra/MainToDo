@@ -1,0 +1,1856 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<!-- Google fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+<!-- Bootstrap icons -->
+<link rel="stylesheet" href="{% static 'dist/icons/bootstrap-icons-1.4.0/bootstrap-icons.min.css' %}" type="text/css">
+<!-- Bootstrap Docs -->
+<link rel="stylesheet" href="{% static 'dist/css/bootstrap-docs.css' %}" type="text/css">
+
+    <!-- quill -->
+    <link href="{% static 'libs/quill/quill.snow.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Clockpicker -->
+    <link rel="stylesheet" href="{% static 'libs/clockpicker/bootstrap-clockpicker.min.css' %}" type="text/css">
+
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="{% static 'libs/datepicker/daterangepicker.css' %}" type="text/css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{% static 'libs/select2/css/select2.min.css' %}" type="text/css">
+{% endblock %}
+
+{% block main_content %}
+<!-- sidebars -->
+
+<!-- notifications sidebar -->
+<div class="sidebar" id="notifications">
+    <div class="sidebar-header d-block align-items-end">
+        <div class="align-items-center d-flex justify-content-between py-4">
+            Notifications
+            <button data-sidebar-close>
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active nav-link-notify" data-bs-toggle="tab" href="#activities">Activities</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#notes">Notes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#alerts">Alerts</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-content">
+        <div class="tab-content">
+            <div class="tab-pane active" id="activities">
+                <div class="tab-pane-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="px-0 list-group-item">
+                            <a href="#" class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <figure class="avatar avatar-info me-3">
+                                            <span class="avatar-text rounded-circle">
+                                                <i class="bi bi-person"></i>
+                                            </span>
+                                    </figure>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 fw-bold d-flex justify-content-between">
+                                        You joined a group
+                                    </p>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Today
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <a href="#" class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <figure class="avatar avatar-warning me-3">
+                                            <span class="avatar-text rounded-circle">
+                                                <i class="bi bi-hdd"></i>
+                                            </span>
+                                    </figure>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 fw-bold d-flex justify-content-between">
+                                        Storage is running low!
+                                    </p>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Today
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <a href="#" class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <figure class="avatar avatar-secondary me-3">
+                                            <span
+                                                class="avatar-text rounded-circle">
+                                                <i class="bi bi-file-text"></i>
+                                            </span>
+                                    </figure>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 d-flex justify-content-between">
+                                        1 person sent a file
+                                    </p>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Yesterday
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <a href="#" class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <figure class="avatar avatar-success me-3">
+                                            <span class="avatar-text rounded-circle">
+                                                <i class="bi bi-download"></i>
+                                            </span>
+                                    </figure>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 d-flex justify-content-between">
+                                        Reports ready to download
+                                    </p>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Yesterday
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <a href="#" class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <figure class="avatar avatar-info me-3">
+                                            <span class="avatar-text rounded-circle">
+                                                <i class="bi bi-lock"></i>
+                                            </span>
+                                    </figure>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 d-flex justify-content-between">
+                                        2 steps verification
+                                    </p>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> 20 min ago
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane-footer">
+                    <a href="#" class="btn btn-success">
+                        <i class="bi bi-check2 me-2"></i> Make All Read
+                    </a>
+                    <a href="#" class="btn btn-danger ms-2">
+                        <i class="bi bi-trash me-2"></i> Delete all
+                    </a>
+                </div>
+            </div>
+            <div class="tab-pane" id="notes">
+                <div class="tab-pane-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 fw-bold text-success d-flex justify-content-between">
+                                This month's report will be prepared.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> Today
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 fw-bold text-success d-flex justify-content-between">
+                                An email will be sent to the customer.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> Today
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 d-flex justify-content-between">
+                                The meeting will be held.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> Yesterday
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 fw-bold text-success d-flex justify-content-between">
+                                Conversation with users.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> Yesterday
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 fw-bold text-warning d-flex justify-content-between">
+                                Payment refund will be made to the customer.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> 20 min ago
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item">
+                            <p class="mb-0 d-flex justify-content-between">
+                                Payment form will be activated.
+                            </p>
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> 20 min ago
+                            </span>
+                            <div class="mt-2">
+                                <a href="#">Edit</a>
+                                <a href="#" class="text-danger ms-2">Delete</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane-footer">
+                    <a href="#" class="btn btn-primary btn-block">
+                        <i class="bi bi-plus me-2"></i> Add Notes
+                    </a>
+                </div>
+            </div>
+            <div class="tab-pane" id="alerts">
+                <div class="tab-pane-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="px-0 list-group-item d-flex">
+                            <div class="flex-shrink-0">
+                                <figure class="avatar avatar-warning me-3">
+                                        <span class="avatar-text rounded-circle">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+                                </figure>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-bold d-flex justify-content-between">
+                                    Signed in with a different device.
+                                </p>
+                                <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Yesterday
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item d-flex">
+                            <div class="flex-shrink-0">
+                                <figure class="avatar avatar-warning me-3">
+                                        <span class="avatar-text fw-bold rounded-circle">
+                                            <i class="bi bi-file-text"></i>
+                                        </span>
+                                </figure>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-bold d-flex justify-content-between">
+                                    Your billing information is not active.
+                                </p>
+                                <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Yesterday
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item d-flex">
+                            <div class="flex-shrink-0">
+                                <figure class="avatar avatar-warning me-3">
+                                        <span class="avatar-text rounded-circle">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+                                </figure>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 d-flex justify-content-between">
+                                    Your subscription has expired.
+                                </p>
+                                <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Today
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="px-0 list-group-item d-flex">
+                            <div class="flex-shrink-0">
+                                <figure class="avatar avatar-warning me-3">
+                                        <span class="avatar-text rounded-circle">
+                                            <i class="bi bi-hdd"></i>
+                                        </span>
+                                </figure>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 d-flex justify-content-between">
+                                    Your storage space is running low
+                                </p>
+                                <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i> Today
+                                    </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane-footer">
+                    <a href="#" class="btn btn-success">
+                        <i class="bi bi-check2 me-2"></i> Make All Read
+                    </a>
+                    <a href="#" class="btn btn-danger ms-2">
+                        <i class="bi bi-trash me-2"></i> Delete all
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./ notifications sidebar -->
+
+<!-- settings sidebar -->
+<div class="sidebar" id="settings">
+    <div class="sidebar-header">
+        <div>
+            <i class="bi bi-gear me-2"></i>
+            Settings
+        </div>
+        <button data-sidebar-close>
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+    <div class="sidebar-content">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
+                    <label class="form-check-label" for="flexCheckDefault1">
+                        Remember next visits
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
+                    <label class="form-check-label" for="flexCheckDefault2">
+                        Enable report generation.
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked>
+                    <label class="form-check-label" for="flexCheckDefault3">
+                        Allow notifications.
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                    <label class="form-check-label" for="flexCheckDefault4">
+                        Hide user requests
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked>
+                    <label class="form-check-label" for="flexCheckDefault5">
+                        Speed up demands
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Hide menus
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-action">
+        <a href="#" class="btn btn-primary">All Settings</a>
+    </div>
+</div>
+<!-- ./ settings sidebar -->
+
+<!-- search sidebar -->
+<div class="sidebar" id="search">
+    <div class="sidebar-header">
+        Search
+        <button data-sidebar-close>
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+    <div class="sidebar-content">
+        <form class="mb-4">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-describedby="button-search-addon">
+                <button class="btn btn-outline-light" type="button" id="button-search-addon">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+        <h6 class="mb-3">Last searched</h6>
+        <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Reports for 2021</a>
+                <a href="#" class="btn text-danger btn-sm" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Current users</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Meeting notes</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+        </div>
+        <h6 class="mb-3">Recently viewed</h6>
+        <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-secondary avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-check-circle"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Todo list</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-warning avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-wallet2"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Pricing table</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-info avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-gear"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Settings</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-success avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-person-circle"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Users</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-action">
+        <a href="#" class="btn btn-danger">All Clear</a>
+    </div>
+</div>
+<!-- ./ search sidebar -->
+
+<!-- ./ sidebars -->
+
+<!-- menu -->
+<div class="menu">
+    <div class="menu-header">
+        <a href="index-2.html" class="menu-header-logo">
+            <img src="https://vetra.laborasyon.com/assets/images/logo.svg" alt="logo">
+        </a>
+        <a href="index-2.html" class="btn btn-sm menu-close-btn">
+            <i class="bi bi-x"></i>
+        </a>
+    </div>
+    <div class="menu-body">
+        
+        <ul>
+            <li class="menu-divider">E-Commerce</li>
+            <li>
+                <a  href="index-2.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-receipt"></i>
+                    </span>
+                    <span>Orders</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="orders.html">List</a>
+                    </li>
+                    <li>
+                        <a  href="order-detail.html">Detail</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-truck"></i>
+                    </span>
+                    <span>Products</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="product-list.html">List
+                            View</a>
+                    </li>
+                    <li>
+                        <a  href="product-grid.html">Grid
+                            View</a>
+                    </li>
+                    <li>
+                        <a  href="product-detail.html">Product Detail</a>
+                    </li>
+                    <li>
+                        <a  href="shopping-cart.html">Shopping
+                            Cart</a>
+                    </li>
+                    <li>
+                        <a  href="checkout.html">Checkout</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Buyer</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="buyer-dashboard.html">Dashboard</a>
+                    </li>
+                    <li>
+                        <a  href="buyer-orders.html">Orders</a>
+                    </li>
+                    <li>
+                        <a  href="buyer-addresses.html">Addresses</a>
+                    </li>
+                    <li>
+                        <a  href="buyer-wishlist.html">Wishlist</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a  href="customers.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </span>
+                    <span>Customers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-receipt"></i>
+                    </span>
+                    <span>Invoices</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="invoices.html"
+                           >List</a>
+                    </li>
+                    <li>
+                        <a href="invoice-detail.html"
+                           >Detail</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-divider">Apps</li>
+            <li>
+                <a  href="chats.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-chat-square"></i>
+                    </span>
+                    <span>Chats</span>
+                    <span class="badge bg-success rounded-circle ms-auto">2</span>
+                </a>
+            </li>
+            <li>
+                <a href="email.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <span>Email</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="email.html">
+                            <span>Inbox</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="email-detail.html">
+                            <span>Detail</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="email-template.html">
+                            <span>Email Template</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="todo-list.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </span>
+                    <span>Todo App</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="todo-list.html">
+                            <span>List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="todo-detail.html">
+                            <span>Details</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-divider">Pages</li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-person"></i>
+                    </span>
+                    <span>Profile</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="profile-posts.html">Post</a>
+                    </li>
+                    <li>
+                        <a  href="profile-connections.html">Connections</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+                    <span>Users</span>
+                </a>
+                <ul>
+                    <li><a  href="user-list.html">List View</a></li>
+                    <li><a  href="user-grid.html">Grid View</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-lock"></i>
+                    </span>
+                    <span>Authentication</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="login.html" target="_blank">Login</a>
+                    </li>
+                    <li>
+                        <a href="register.html" target="_blank">Register</a>
+                    </li>
+                    <li>
+                        <a href="reset-password.html" target="_blank">Reset Password</a>
+                    </li>
+                    <li>
+                        <a href="lock-screen.html" target="_blank">Lock Screen</a>
+                    </li>
+                    <li>
+                        <a href="account-verified.html" target="_blank">Account Verified</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-exclamation-octagon"></i>
+                    </span>
+                    <span>Error Pages</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="404.html" target="_blank">404</a>
+                    </li>
+                    <li>
+                        <a  href="access-denied.html">Access Denied</a>
+                    </li>
+                    <li>
+                        <a href="under-construction.html" target="_blank">Under Construction</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a  class="active"
+                    href="settings.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-gear"></i>
+                    </span>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li>
+                <a  href="pricing-table.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Pricing Table</span>
+                    <span class="badge bg-success ms-auto">New</span>
+                </a>
+            </li>
+            <li>
+                <a  href="search-page.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <span>Search Page</span>
+                </a>
+            </li>
+            <li>
+                <a  href="faq.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-question-circle"></i>
+                    </span>
+                    <span>FAQ</span>
+                </a>
+            </li>
+            <li class="menu-divider">User Interface</li>
+            <li>
+                <a href="#" target="_blank">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </span>
+                    <span>Components</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="accordion.html">Accordion</a>
+                    </li>
+                    <li>
+                        <a  href="alert.html">Alerts</a>
+                    </li>
+                    <li>
+                        <a  href="badge.html">Badge</a>
+                    </li>
+                    <li>
+                        <a  href="breadcrumb.html">Breadcrumb</a>
+                    </li>
+                    <li>
+                        <a  href="buttons.html">Buttons</a>
+                    </li>
+                    <li>
+                        <a  href="button-group.html">Button Group</a>
+                    </li>
+                    <li>
+                        <a  href="card.html">Card</a>
+                    </li>
+                    <li>
+                        <a  href="card-masonry.html">Card Masonry</a>
+                    </li>
+                    <li>
+                        <a  href="carousel.html">Carousel</a>
+                    </li>
+                    <li>
+                        <a  href="collapse.html">Collapse</a>
+                    </li>
+                    <li>
+                        <a  href="dropdown.html">Dropdowns</a>
+                    </li>
+                    <li>
+                        <a  href="list-group.html">List Group</a>
+                    </li>
+                    <li>
+                        <a  href="modal.html">Modal</a>
+                    </li>
+                    <li>
+                        <a  href="navs-tabs.html">Navs and Tabs</a>
+                    </li>
+                    <li>
+                        <a  href="pagination.html">Pagination</a>
+                    </li>
+                    <li>
+                        <a  href="popovers.html">Popovers</a>
+                    </li>
+                    <li>
+                        <a  href="progress.html">Progress</a>
+                    </li>
+                    <li>
+                        <a  href="spinners.html">Spinners</a>
+                    </li>
+                    <li>
+                        <a  href="toasts.html">Toasts</a>
+                    </li>
+                    <li>
+                        <a  href="tables.html">
+                            <span>Tables</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="tooltip.html">Tooltip</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" target="_blank">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </span>
+                    <span>Forms</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span>Form Elements</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a  href="forms.html">Overview</a>
+                            </li>
+                            <li>
+                                <a  href="form-control.html">Form Controls</a>
+                            </li>
+                            <li>
+                                <a  href="select.html">Select</a>
+                            </li>
+                            <li>
+                                <a  href="checks-radios.html">Checks and Radios</a>
+                            </li>
+                            <li>
+                                <a  href="range.html">Range</a>
+                            </li>
+                            <li>
+                                <a  href="input-group.html">Input Group</a>
+                            </li>
+                            <li>
+                                <a  href="floating-label.html">Floating Label</a>
+                            </li>
+                            <li>
+                                <a  href="forms-layout.html">Form Layout</a>
+                            </li>
+                            <li>
+                                <a  href="form-validation.html">Validation</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a  href="form-wizard.html">
+                            <span>Wizard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="form-repeater.html">
+                            <span>Repeater</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="file-upload.html">
+                            <span>File Upload</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="ckeditor.html">
+                            <span>CKEditor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="range-slider.html">
+                            <span>Range Slider</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="select2.html">
+                            <span>Select2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="tags-input.html">
+                            <span>Tags Input</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="input-mask.html">
+                            <span>Input Mask</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="datepicker.html">
+                            <span>Datepicker</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="clockpicker.html">
+                            <span>Clock Picker</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-heart"></i>
+                    </span>
+                    <span>Content</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="typography.html">
+                            <span>Typography</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="images.html">
+                            <span>Images</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="figures.html">
+                            <span>Figures</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="avatar.html">
+                            <span>Avatar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="icons.html">
+                            <span>Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="colors.html">
+                            <span>Colors</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </span>
+                    <span>Charts</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="apexchart.html">Apex Chart</a>
+                    </li>
+                    <li>
+                        <a  href="chartjs.html">Chartjs</a>
+                    </li>
+                    <li>
+                        <a  href="justgage.html">Justgage</a>
+                    </li>
+                    <li>
+                        <a  href="morsis.html">Morsis</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-paperclip"></i>
+                    </span>
+                    <span>Extensions</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="vector-map.html">
+                            <span>Vector Map</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="datatable.html">
+                            <span>Datatable</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="sweet-alert.html">Sweet Alert</a>
+                    </li>
+                    <li>
+                        <a  href="lightbox.html">Lightbox</a>
+                    </li>
+                    <li>
+                        <a  href="introjs.html">Introjs</a>
+                    </li>
+                    <li>
+                        <a  href="nestable.html">Nestable</a>
+                    </li>
+                    <li>
+                        <a  href="rating.html">Rating</a>
+                    </li>
+                    <li>
+                        <a  href="code-highlighter.html">Code Highlighter</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-divider">Other</li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-list"></i>
+                    </span>
+                    <span>Menu Item</span>
+                </a>
+                <ul>
+                    <li><a href="#">Menu Item 1</a></li>
+                    <li>
+                        <a href="#">Menu Item 2</a>
+                        <ul>
+                            <li>
+                                <a href="#">Menu Item 2.1</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu Item 2.2</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="disabled">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-hand-index-thumb"></i>
+                    </span>
+                    <span>Disabled</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- ./  menu -->
+
+<!-- layout-wrapper -->
+<div class="layout-wrapper">
+
+    <!-- header -->
+    <div class="header">
+    <div class="menu-toggle-btn"> <!-- Menu close button for mobile devices -->
+        <a href="#">
+            <i class="bi bi-list"></i>
+        </a>
+    </div>
+    <!-- Logo -->
+    <a href="index-2.html" class="logo">
+        <img width="100" src="https://vetra.laborasyon.com/assets/images/logo.svg" alt="logo">
+    </a>
+    <!-- ./ Logo -->
+    <div class="page-title">User Profile</div>
+    
+    <div class="header-bar ms-auto">
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a href="#" class="nav-link nav-link-notify" data-count="2" data-sidebar-target="#notifications">
+                    <i class="bi bi-bell icon-lg"></i>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link nav-link-notify" data-count="3" data-bs-toggle="dropdown">
+                    <i class="bi bi-cart2 icon-lg"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
+                    <h6 class="m-0 px-4 py-3 border-bottom">Shopping Cart</h6>
+                    <div class="dropdown-menu-body">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex align-items-center">
+                                <a href="#" class="text-danger me-3" title="Remove">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                <a href="#" class="me-3 flex-shrink-0 ">
+                                    <img src="{% static 'assets/images/products/3.jpg' %}" class="rounded" width="60"
+                                         alt="...">
+                                </a>
+                                <div>
+                                    <h6>Digital clock</h6>
+                                    <div>1 x $1.190,90</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex align-items-center">
+                                <a href="#" class="text-danger me-3" title="Remove">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                <a href="#" class="me-3 flex-shrink-0 ">
+                                    <img src="{% static 'assets/images/products/4.jpg' %}" class="rounded" width="60"
+                                         alt="...">
+                                </a>
+                                <div>
+                                    <h6>Toy Car</h6>
+                                    <div>1 x $139.58</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex align-items-center">
+                                <a href="#" class="text-danger me-3" title="Remove">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                <a href="#" class="me-3 flex-shrink-0 ">
+                                    <img src="{% static 'assets/images/products/5.jpg' %}" class="rounded" width="60"
+                                         alt="...">
+                                </a>
+                                <div>
+                                    <h6>Sunglasses</h6>
+                                    <div>2 x $50,90</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex align-items-center">
+                                <a href="#" class="text-danger me-3" title="Remove">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                <a href="#" class="me-3 flex-shrink-0 ">
+                                    <img src="{% static 'assets/images/products/6.jpg' %}" class="rounded" width="60"
+                                         alt="...">
+                                </a>
+                                <div>
+                                    <h6>Cake</h6>
+                                    <div>1 x $10,50</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="m-0 px-4 py-3 border-top small">Sub Total : <strong
+                            class="text-primary">$1.442,78</strong></h6>
+                </div>
+            </li>
+            <li class="nav-item ms-3">
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="avatar me-3">
+                            <img src="{{profile_data.ProfileImage.url}}"
+                                 class="rounded-circle" alt="image">
+                        </div>
+                        <div>
+                            <div class="fw-bold">{{profile_data.FullName}}</div>
+                            <small class="text-muted">{{profile_data.Master.Role.Role}}</small>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a href="#" class="dropdown-item d-flex align-items-center">
+                            <i class="bi bi-person dropdown-item-icon"></i> Profile
+                        </a>
+                        <a href="#" class="dropdown-item d-flex align-items-center">
+                            <i class="bi bi-envelope dropdown-item-icon"></i> Inbox
+                        </a>
+                        <a href="#" class="dropdown-item d-flex align-items-center" data-sidebar-target="#settings">
+                            <i class="bi bi-gear dropdown-item-icon"></i> Settings
+                        </a>
+                        <a href="{% url 'logout' %}" class="dropdown-item d-flex align-items-center text-danger">
+                            <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- Header mobile buttons -->
+    <div class="header-mobile-buttons">
+        <a href="#" class="search-bar-btn">
+            <i class="bi bi-search"></i>
+        </a>
+        <a href="#" class="actions-btn">
+            <i class="bi bi-three-dots"></i>
+        </a>
+    </div>
+    <!-- ./ Header mobile buttons -->
+</div>
+    <!-- ./ header -->
+
+    <!-- content -->
+    <div class="content ">
+        
+    <div class="row flex-column-reverse flex-md-row">
+        <div class="col-md-8">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="mb-4">
+                        <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
+                            <figure class="me-4 flex-shrink-0">
+                                <img class="rounded-pill" width="100" height="100" src="{{profile_data.ProfileImage.url}}" alt="...">
+                            </figure>
+                            <div class="flex-fill">
+                                <h5>{{profile_data.FullName}}</h5>
+                                <h6 class="mb-3 text-muted">{{profile_data.Master.Email}}</h6>
+                                <form method="post" action="{% url 'upload_profile_image' %}" onchange="javascript:this.submit()" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="file" class="d-none" name="profile_image" id="profile_image" />
+                                    <label class="btn btn-primary btn-sm me-2" for="profile_image">Change Avatar</label>
+                                    <button class="btn btn-outline-danger btn-sm btn-icon" data-bs-toggle="tooltip" title="Remove Avatar">
+                                        <i class="bi bi-trash me-0"></i>
+                                    </button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <form class="card-body needs-validation" method="post" action="{% url 'profile_update' %}" novalidate>
+                                {% csrf_token %}
+                                <h6 class="card-title mb-4">Basic Information</h6>
+                                
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" name="full_name" value="{{profile_data.FullName}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide your full name.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Mobile</label>
+                                        <input type="text" class="form-control" name="mobile" value="{{profile_data.Mobile}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid mobile number.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">Country</label>
+                                        <input type="text" class="form-control" name="country" value="{{profile_data.Country}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid country.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">State</label>
+                                        <input type="text" class="form-control" name="state" value="{{profile_data.State}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid state.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">City</label>
+                                        <input type="text" class="form-control" name="city" value="{{profile_data.City}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Date of Birth</label>
+                                        <input type="text" name="birth_date" class="form-control" value="{{profile_data.BirthDate}}" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide your birth date.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Gender {{profile_data.Gender}}</label>
+                                        
+                                        <div class="form-control">
+                                            {% for k,v in gender_choices %}
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" id="{{k}}" name="gender" class="form-check-input" value="{{k}}" required {% if k == profile_data.Gender %}checked{% endif %}>
+                                                <label class="form-check-label text-uppercase" for="{{k}}">{{v}}</label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose gender.
+                                        </div>
+                                        
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-icon w-auto m-auto">
+                                        <i class="bi bi-check-circle"></i> Save
+                                    </button>
+                                
+                                </div>
+                            </form>
+                        </div>
+
+                        
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade show active" id="todo" role="tabpanel" aria-labelledby="todo-tab">
+                    <div class="mb-4">
+                        
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex mb-3" style="align-content: center; justify-content: space-between;">
+                                    <h6 class="card-title pl-5">My TODO</h6>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#newTaskModal" title="Add New Task" class="btn btn-primary btn-sm btn-icon">
+                                        <i class="bi bi-plus-circle"></i> Add Task
+                                    </a>
+                                </div>
+                                <hr>
+                                <div class="todo-list">
+                                    <ul class="list-group">
+                                        <li class="list-group-item gap-3" data-detail-url="todo-detail.html">
+                                            <div class="flex-shrink-0">
+                                                <i class="todo-sortable-handle bi bi-grip-horizontal"></i>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <i class="bi bi-star"></i>
+                                            </div>
+                                            <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                <div class="text-truncate">How To Protect Your Computer Very Useful Tips</div>
+                                                <div class="ps-3 d-flex gap-3 align-items-center flex-shrink-0">
+                                                    <div class="d-sm-inline">
+                                                        <div class="badge bg-danger">Social</div>
+                                                    </div>
+                                                    <div class="d-sm-inline">
+                                                        <div class="avatar-group">
+                                                            <figure class="avatar avatar-sm" title="Lisle Essam"
+                                                                    data-bs-toggle="tooltip">
+                                                                <img src="../../assets/images/user/women_avatar2.jpg"
+                                                                    class="rounded-circle"
+                                                                    alt="image">
+                                                            </figure>
+                                                            <figure class="avatar avatar-sm" title="Baxie Roseblade"
+                                                                    data-bs-toggle="tooltip">
+                                                                <img src="../../assets/images/user/man_avatar5.jpg"
+                                                                    class="rounded-circle"
+                                                                    alt="image">
+                                                            </figure>
+                                                            <figure class="avatar avatar-sm" title="Mella Mixter"
+                                                                    data-bs-toggle="tooltip">
+                                                                <img src="../../assets/images/user/women_avatar1.jpg"
+                                                                    class="rounded-circle"
+                                                                    alt="image">
+                                                            </figure>
+                                                            <figure class="avatar avatar-sm" title="Jo Hugill"
+                                                                    data-bs-toggle="tooltip">
+                                                                <img src="../../assets/images/user/man_avatar1.jpg"
+                                                                    class="rounded-circle"
+                                                                    alt="image">
+                                                            </figure>
+                                                            <figure class="avatar avatar-sm" title="Cullie Philcott"
+                                                                    data-bs-toggle="tooltip">
+                                                                <img src="../../assets/images/user/women_avatar5.jpg"
+                                                                    class="rounded-circle"
+                                                                    alt="image">
+                                                            </figure>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown">
+                                                        <a href="#" class="btn btn-floating btn-sm" data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="#">View Detail</a>
+                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <div class="card">
+                        <form class="card-body row needs-validation" method="post" action="#" novalidate>
+                            {% csrf_token %}
+                            <h6 class="card-title mb-4">Change Password</h6>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please provide your current password.
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please create your new password.
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    You must need to confirm password.
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-success btn-icon w-auto m-auto">
+                                    <i class="bi bi-check-circle"></i> Change
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="notification-settings" role="tabpanel"
+                     aria-labelledby="notification-settings-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title mb-4">Notifications</h6>
+                            <h6 class="mb-4">Activity Notifications</h6>
+                            <div class="mb-5">
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" checked id="cs1">
+                                        <label class="form-check-label" for="cs1">Someone assigns me to a task</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" checked id="cs2">
+                                        <label class="form-check-label" for="cs2">Someone mentions me in a
+                                            conversation</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" checked id="cs3">
+                                        <label class="form-check-label" for="cs3">Someone adds me to a project</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="cs4">
+                                        <label class="form-check-label" for="cs4">Activity on a project I am a member
+                                            of</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="mb-4">Service Notifications</h6>
+                            <div>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="cs5">
+                                        <label class="form-check-label" for="cs5">Monthly newsletter</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" checked id="cs6">
+                                        <label class="form-check-label" for="cs6">Major feature enhancements</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="cs7">
+                                        <label class="form-check-label" for="cs7">Minor updates and bug fixes</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="integrations" role="tabpanel" aria-labelledby="integrations-tab">
+                    <div class="card widget">
+                        <div class="card-header">
+                            <h6 class="card-title">Integrations</h6>
+                        </div>
+                        <div class="card-body p-0 overflow-hidden">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-4">
+                                    <div class="d-md-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <figure class="mb-0 me-3">
+                                                <img src="https://vetra.laborasyon.com/assets/svg/logo-integration-slack.svg"
+                                                     alt="...">
+                                            </figure>
+                                            <div>
+                                                <h5 class="mb-1">Slack</h5>
+                                                <small class="text-muted">Permissions: Read, Write, Comment</small>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-danger mt-3 mt-md-0">Disconnect</button>
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-4">
+                                    <div class="d-md-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <figure class="mb-0 me-3">
+                                                <img src="https://vetra.laborasyon.com/assets/svg/logo-integration-drive.svg"
+                                                     alt="...">
+                                            </figure>
+                                            <div>
+                                                <h5 class="mb-1">Google Drive</h5>
+                                                <small class="text-muted">Permissions: Read, Write</small>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-success mt-3 mt-md-0">Connect</button>
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-4">
+                                    <div class="d-md-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <figure class="mb-0 me-3">
+                                                <img src="https://vetra.laborasyon.com/assets/svg/logo-integration-dropbox.svg"
+                                                     alt="...">
+                                            </figure>
+                                            <div>
+                                                <h5 class="mb-1">Dropbox</h5>
+                                                <small class="text-muted">Permissions: Read, Write, Upload</small>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-danger mt-3 mt-md-0">Disconnect</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card sticky-top mb-4 mb-md-0">
+                <div class="card-body">
+                    <ul class="nav nav-pills flex-column gap-2" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="true">
+                                <i class="bi bi-person me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo" role="tab"
+                               aria-controls="todo" aria-selected="true">
+                                <i class="bi bi-person me-2"></i> My TODO
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="password-tab" data-bs-toggle="tab" href="#password" role="tab"
+                               aria-controls="password" aria-selected="false">
+                                <i class="bi bi-lock me-2"></i> Password
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="notification-settings-tab" data-bs-toggle="tab" href="#notification-settings"
+                               role="tab"
+                               aria-controls="notification-settings" aria-selected="false">
+                                <i class="bi bi-bell me-2"></i> Notifications
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="integrations-tab" data-bs-toggle="tab" href="#integrations" role="tab"
+                               aria-controls="integrations" aria-selected="false">
+                                <i class="bi bi-arrow-down-up me-2"></i> Integrations
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- ./ content -->
+
+    <div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off">
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Task title</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Tags</label>
+                            <div class="col-sm-9">
+                                <select class="task-tags-input" multiple>
+                                    <option value="Theme Support">Theme Support</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option selected value="Social">Social</option>
+                                    <option selected value="Friends">Friends</option>
+                                    <option value="Coding">Coding</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row row-sm">
+                            <label class="col-sm-3 col-form-label">Deadline</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control task-datepicker-input"
+                                       placeholder="Date">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control task-time-input"
+                                       placeholder="Time">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Participate</label>
+                            <div class="col-sm-9 d-flex justify-content-between">
+                                <div class="avatar-group">
+                                    <figure class="avatar avatar-sm">
+                                        <img src="../../assets/images/user/women_avatar3.jpg"
+                                             class="rounded-circle"
+                                             alt="image">
+                                    </figure>
+                                    <figure class="avatar avatar-danger avatar-sm">
+                                        <span class="avatar-text rounded-circle">S</span>
+                                    </figure>
+                                    <figure class="avatar avatar-sm">
+                                        <img src="../../assets/images/user/women_avatar5.jpg"
+                                             class="rounded-circle"
+                                             alt="image">
+                                    </figure>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn" title="Add User" data-bs-toggle="dropdown">
+                                        Add User
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end p-0">
+                                        <div class="p-3">
+                                            <h6 class="mb-3">Add user</h6>
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" class="form-control" placeholder="Search..">
+                                                <button class="btn btn-light" type="button" id="button-addon2">
+                                                    <i class="bi bi-search"></i>
+                                                </button>
+                                            </div>
+                                            <ul class="list-group list-group-flush mt-2">
+                                                <li class="list-group-item d-flex align-items-center ps-0 pe-0">
+                                                    <div class="me-2">
+                                                        <figure class="avatar avatar-info avatar-sm">
+                                                            <span class="avatar-text rounded-circle">V</span>
+                                                        </figure>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">Valentine Maton</h6>
+                                                    </div>
+                                                    <div class="dropdown ms-auto">
+                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light btn-sm"
+                                                           aria-haspopup="true" aria-expanded="false">
+                                                            <i class="bi bi-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center ps-0 pe-0">
+                                                    <div class="me-2">
+                                                        <figure class="avatar avatar-sm">
+                                                            <img
+                                                                src="../../assets/images/user/women_avatar3.jpg"
+                                                                class="rounded-circle" alt="image">
+                                                        </figure>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">Valentine Maton</h6>
+                                                    </div>
+                                                    <div class="dropdown ms-auto">
+                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light btn-sm"
+                                                           aria-haspopup="true" aria-expanded="false">
+                                                            <i class="bi bi-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center ps-0 pe-0">
+                                                    <div class="me-2">
+                                                        <figure class="avatar avatar-sm">
+                                                            <img
+                                                                src="../../assets/images/user/women_avatar2.jpg"
+                                                                class="rounded-circle" alt="image">
+                                                        </figure>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">Valentine Maton</h6>
+                                                    </div>
+                                                    <div class="dropdown ms-auto">
+                                                        <a href="#" data-bs-toggle="dropdown"
+                                                           class="btn btn-light btn-sm ms-3" aria-haspopup="true"
+                                                           aria-expanded="false">
+                                                            <i class="bi bi-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center ps-0 pe-0">
+                                                    <div class="me-2">
+                                                        <figure class="avatar avatar-sm">
+                                                            <img src="../../assets/images/user/man_avatar2.jpg"
+                                                                 class="rounded-circle" alt="image">
+                                                        </figure>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">Valentine Maton</h6>
+                                                    </div>
+                                                    <div class="dropdown ms-auto">
+                                                        <a href="#" data-bs-toggle="dropdown"
+                                                           class="btn btn-light btn-sm ms-3" aria-haspopup="true"
+                                                           aria-expanded="false">
+                                                            <i class="bi bi-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="6"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-3"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- content-footer -->
+    <footer class="content-footer">
+        <div>© 2021 Vetra - <a href="https://laborasyon.com/" target="_blank">Laborasyon</a></div>
+        <div>
+            <nav class="nav gap-4">
+                <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
+                <a href="#" class="nav-link">Change Log</a>
+                <a href="#" class="nav-link">Get Help</a>
+            </nav>
+        </div>
+    </footer>
+    <!-- ./ content-footer -->
+
+</div>
+<!-- ./ layout-wrapper -->
+{% endblock %}
+
+{% block js %}
+<!-- Clockpicker -->
+<script src="{% static 'libs/clockpicker/bootstrap-clockpicker.min.js' %}"></script>
+
+
+<!-- Datepicker -->
+<script src="{% static 'libs/datepicker/daterangepicker.js' %}"></script>
+
+<!-- JQuery ui -->
+<script src="{% static 'libs/jquery-ui/jquery-ui.min.js' %}"></script>
+
+<!-- Select2 -->
+<script src="{% static 'libs/select2/js/select2.min.js' %}"></script>
+
+<!-- Examples -->
+<script src="{% static 'dist/js/examples/todo-list.js' %}"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('input[name="birth_date"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        });
+    });
+</script>
+{% endblock %}
