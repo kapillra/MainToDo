@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.conf import settings
+from datetime import datetime
 
 login_page_url = 'login_page.html'
 register_page_url = 'register_page.html'
@@ -27,10 +28,22 @@ def profile_data(request):
     master = Master.objects.get(Email=request.session['email'])
     user_profile = UserProfile.objects.get(Master=master)
 
-    user_profile.BirthDate = user_profile.BirthDate.strftime("%Y-%m-%d")
+    if user_profile.BirthDate:
+        user_profile.BirthDate =  user_profile.BirthDate.strftime("%Y-%m-%d")
 
     default_data['profile_data'] = user_profile
     default_data['gender_choices'] = gender_choices
+
+    all_user_profiles = UserProfile.objects.all()
+
+    task_members = list()
+    for member in all_user_profiles:
+        if member.id != user_profile.id:
+            task_members.append(member)
+
+    default_data['all_members'] = task_members
+    
+    default_data['task_list'] = ToDoList.objects.all()
 
     print('profile data called')
 
@@ -125,6 +138,33 @@ def profile_update(request):
 
     return redirect(profile_page)
     
+
+# add task
+def add_task(request):
+    master = Master.objects.get(Email=request.session['email'])
+    date = request.POST['date'].split('-')
+    time = request.POST['time'].split(':')
+    
+    deadline = datetime(int(date[0]), int(date[1]), int(date[2]), int(time[0]), int(time[1]))
+
+    todo = ToDoList.objects.create(
+        Title = request.POST['task_title'],
+        Tags = request.POST['tags'],
+        Deadline = request.POST['date'],
+        Description = request.POST['description'],
+    )
+
+    members = request.POST['members']
+    for member in members:
+        user = UserProfile.objects.get(id=int(member))
+        TaskAssociation.objects.create(
+            Member = user,
+            ToDoList = todo,
+        )
+
+    print(deadline)
+    print(request.POST)
+    return redirect(profile_page)
 
 # logout
 def logout(request):

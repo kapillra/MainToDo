@@ -68,7 +68,7 @@ class ToDoList(models.Model):
 
     Description = models.TextField(max_length=255)
     Status = models.CharField(max_length=15, choices=status_choices)
-    DateCompleted = models.DateTimeField(auto_created=True)
+    DateCompleted = models.DateTimeField(auto_created=True, blank=True, null=True)
 
     class Meta:
         db_table = 'todolist'

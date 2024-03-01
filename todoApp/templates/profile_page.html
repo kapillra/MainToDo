@@ -1369,51 +1369,20 @@
                                 <hr>
                                 <div class="todo-list">
                                     <ul class="list-group">
+                                        {% for task in task_list %}
                                         <li class="list-group-item gap-3" data-detail-url="todo-detail.html">
-                                            <div class="flex-shrink-0">
-                                                <i class="todo-sortable-handle bi bi-grip-horizontal"></i>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <i class="bi bi-star"></i>
-                                            </div>
+                                            
                                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                                <div class="text-truncate">How To Protect Your Computer Very Useful Tips</div>
+                                                <div class="text-truncate">{{task.Title}}-{{task.Description}}</div>
                                                 <div class="ps-3 d-flex gap-3 align-items-center flex-shrink-0">
                                                     <div class="d-sm-inline">
-                                                        <div class="badge bg-danger">Social</div>
+                                                        <div class="badge bg-danger">{{task.Tags}}</div>
                                                     </div>
                                                     <div class="d-sm-inline">
                                                         <div class="avatar-group">
                                                             <figure class="avatar avatar-sm" title="Lisle Essam"
                                                                     data-bs-toggle="tooltip">
                                                                 <img src="../../assets/images/user/women_avatar2.jpg"
-                                                                    class="rounded-circle"
-                                                                    alt="image">
-                                                            </figure>
-                                                            <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                                    data-bs-toggle="tooltip">
-                                                                <img src="../../assets/images/user/man_avatar5.jpg"
-                                                                    class="rounded-circle"
-                                                                    alt="image">
-                                                            </figure>
-                                                            <figure class="avatar avatar-sm" title="Mella Mixter"
-                                                                    data-bs-toggle="tooltip">
-                                                                <img src="../../assets/images/user/women_avatar1.jpg"
-                                                                    class="rounded-circle"
-                                                                    alt="image">
-                                                            </figure>
-                                                            <figure class="avatar avatar-sm" title="Jo Hugill"
-                                                                    data-bs-toggle="tooltip">
-                                                                <img src="../../assets/images/user/man_avatar1.jpg"
-                                                                    class="rounded-circle"
-                                                                    alt="image">
-                                                            </figure>
-                                                            <figure class="avatar avatar-sm" title="Cullie Philcott"
-                                                                    data-bs-toggle="tooltip">
-                                                                <img src="../../assets/images/user/women_avatar5.jpg"
                                                                     class="rounded-circle"
                                                                     alt="image">
                                                             </figure>
@@ -1432,6 +1401,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
@@ -1650,17 +1620,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form autocomplete="off">
+                    <form autocomplete="off" method="post" action="{% url 'add_task' %}">
+                        {% csrf_token %}
                         <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Task title</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control">
+                                <input type="text" name="task_title" class="form-control">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Tags</label>
                             <div class="col-sm-9">
-                                <select class="task-tags-input" multiple>
+                                <select class="task-tags-input" name="tags" multiple>
                                     <option value="Theme Support">Theme Support</option>
                                     <option value="Freelance">Freelance</option>
                                     <option selected value="Social">Social</option>
@@ -1672,17 +1643,24 @@
                         <div class="mb-3 row row-sm">
                             <label class="col-sm-3 col-form-label">Deadline</label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control task-datepicker-input"
+                                <input type="text" name="date" class="form-control task-datepicker-input"
                                        placeholder="Date">
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control task-time-input"
+                                <input type="text" name="time" class="form-control task-time-input"
                                        placeholder="Time">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Participate</label>
-                            <div class="col-sm-9 d-flex justify-content-between">
+                            <label class="col-sm-3 col-form-label">Members</label>
+                            <div class="col-sm-9">
+                                <select class="task-tags-input" name="members" multiple>
+                                    {% for member in all_members %}
+                                    <option value="{{member.id}}">{{member.FullName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- <div class="col-sm-9 d-flex justify-content-between">
                                 <div class="avatar-group">
                                     <figure class="avatar avatar-sm">
                                         <img src="../../assets/images/user/women_avatar3.jpg"
@@ -1787,12 +1765,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Description</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" rows="6"></textarea>
+                                <textarea class="form-control" name="description" rows="6"></textarea>
                             </div>
                         </div>
                         <div class="mb-3 row">
