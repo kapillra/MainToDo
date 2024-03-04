@@ -1,14 +1,56 @@
 from django.shortcuts import render, redirect
 from .models import *
+from django.core.mail import send_mail
+from random import randint
 from django.conf import settings
 from datetime import datetime
 
 login_page_url = 'login_page.html'
 register_page_url = 'register_page.html'
 profile_page_url = 'profile_page.html'
+otp_page_link = 'otp_page.html'
 reset_pwd_page_url = 'reset_password_page.html'
 
 default_data = {}
+
+# email function
+def send_otp(request):
+    otp = randint(1000, 9999)
+    request.session['otp'] = otp
+
+    send_to = [request.session['reg_data']['email']]
+    send_from = settings.EMAIL_HOST_USER
+    subject = 'Login Attempt'
+    message = f'Hello! We noticed someone entered your account. OTP is: {otp}'
+    
+    print(otp)
+    print('done')
+
+    send_mail(subject, message, send_from, send_to)
+
+## Email Verification
+def verify_otp(request):
+    if int(request.POST['otp']) == request.session['otp']:
+        role = Role.objects.get(id=request.session['reg_data']['role_id'])
+        dept = Department.objects.get(id=request.session['reg_data']['dept_id'])
+        
+        master = Master.objects.create(
+            Role = role,
+            Department = dept,
+            Email = request.session['reg_data']['email'],
+            Password = request.session['reg_data']['pwd'],
+        )
+
+        UserProfile.objects.create(
+            Master = master,
+        )
+
+        print('account has been created.')
+        return redirect(index)
+    else:
+        print('invalid otp.')
+    
+    return redirect(otp_page)
 
 def index(request):
     return render(request, login_page_url)
@@ -18,6 +60,10 @@ def register_page(request):
     dept = Department.objects.all()
 
     return render(request, register_page_url, {'roles': role, 'depts': dept})
+
+# otp_page
+def otp_page(request):
+    return render(request, otp_page_link)
 
 def reset_password_page(request):
     return render(request, reset_pwd_page_url)
@@ -47,14 +93,36 @@ def profile_data(request):
 
     print('profile data called')
 
+# profile page
 def profile_page(request):
     if 'email' in request.session:
         profile_data(request)
         return render(request, profile_page_url, default_data)
     return redirect(index)
 
-
+# register functionality
 def register(request):
+    try:
+        master = Master.objects.get(Email=request.POST['email'])
+        print("Account exist. Please login.")
+        return redirect(register_page)
+    except Master.DoesNotExist as err:
+        print(err)
+        print('account not found')
+
+        request.session['reg_data'] = {
+            'role_id': int(request.POST['roles']),
+            'dept_id': int(request.POST['department']),
+            'email': request.POST['email'],
+            'pwd': request.POST['password']
+        }
+        send_otp(request)
+        return redirect(otp_page)
+    
+
+    return redirect(index)
+
+def old_register(request):
     role = Role.objects.get(id=int(request.POST['roles']))
     dept = Department.objects.get(id=int(request.POST['department']))
     
